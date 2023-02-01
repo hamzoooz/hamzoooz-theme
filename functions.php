@@ -125,9 +125,9 @@ add_action( 'after_setup_theme', 'hamzoooz_setup' );
 
 	// Register and Enqueue Stylesheet
 		wp_enqueue_style( 'merlin-stylesheet', get_stylesheet_uri(), array(), $theme_version );
-        wp_enqueue_style('bootstrap-css',get_template_directory_uri().'/css/bootstrap.min.css');
-        wp_enqueue_style('font-awesome-css',get_template_directory_uri().'/css/all.css');
-        wp_enqueue_style('main',get_template_directory_uri().'/css/main.css');
+        wp_enqueue_style('bootstrap-css',get_template_directory_uri().'/assets/css/bootstrap.min.css');
+        wp_enqueue_style('font-awesome-css',get_template_directory_uri().'/assets/css/all.css');
+        wp_enqueue_style('main',get_template_directory_uri().'/assets/css/main.css');
     }
 
 /*****  function add by custom script ********
@@ -138,12 +138,12 @@ add_action( 'after_setup_theme', 'hamzoooz_setup' );
     {
         wp_deregister_script('jquery'); // to remove old jquery from wordpress
         wp_register_script('jquery', includes_url('/js/jquery/jquery.js') ,false,'', true);// add anew jquery to footer 
-        wp_enqueue_script('bootstrap-js',get_template_directory_uri() .'/js/bootstrap.min.js', array('jquery'), false, true );/* last true to put file script in last body becous the default value false */
-        wp_enqueue_script('fontawesome-js',get_template_directory_uri() .'/js/all.js', array(), false, true );
-        wp_enqueue_script('main-js',get_template_directory_uri() . '/js/main.js',array(),false,true);//array to tell what incluede this fun from libaraly
-        wp_enqueue_script('HTML5 Shiv',get_template_directory_uri() . '/js/HTML5 Shiv 3.7.3.js');
+        wp_enqueue_script('bootstrap-js',get_template_directory_uri() .'/assets/js/bootstrap.min.js', array('jquery'), false, true );/* last true to put file script in last body becous the default value false */
+        wp_enqueue_script('fontawesome-js',get_template_directory_uri() .'/assets/js/all.js', array(), false, true );
+        wp_enqueue_script('main-js',get_template_directory_uri() . '/assets/js/main.js',array(),false,true);//array to tell what incluede this fun from libaraly
+        wp_enqueue_script('HTML5 Shiv',get_template_directory_uri() . '/assets/js/HTML5 Shiv 3.7.3.js');
         wp_script_add_data('HTML5 Shiv','conditional','lt IE 9');
-        wp_enqueue_script('Respond',get_template_directory_uri().'/js/Respond.js');//array to tell what incluede this fun from libaraly
+        wp_enqueue_script('Respond',get_template_directory_uri().'/assets/js/Respond.js');//array to tell what incluede this fun from libaraly
         wp_script_add_data('Respond','conditional','lt IE 9');
     }
 

@@ -1,14 +1,6 @@
 <?php
 
-    // get file walker class to add for menu 
-    require_once('wp-bootstrap-navwalker.php');
-    
-	// add featured Image Support
-    // add_theme_support( 'post-thumbnails' );
 
-    // Add featurs To My Theme
-    // =========================================================================
-    
 if ( ! function_exists( 'hamzoooz_setup' ) ) :
 	/**
 	 * Sets up theme defaults and registers support for various WordPress features.
@@ -34,6 +26,8 @@ if ( ! function_exists( 'hamzoooz_setup' ) ) :
 		// Set detfault Post Thumbnail size
 		set_post_thumbnail_size( 820, 410, true );
 
+		require_once get_template_directory() . '/classes/class-wp-bootstrap-navwalker.php';
+		
 		// This theme uses wp_nav_menu() in one location.
 		register_nav_menus( array(
 			'primary'   => esc_html__( 'Main Navigation', 'hamzoooz' ),
@@ -111,31 +105,15 @@ if ( ! function_exists( 'hamzoooz_setup' ) ) :
 endif; // hamzoooz_setup
 add_action( 'after_setup_theme', 'hamzoooz_setup' );
 
-    // =========================================================================
-    
-
-/******  function add by custom style *********
-******  added by hamzoooz             ********
-******  wp_enqueue_style()           ********/
-
-    function mystyles() {
-        
-	// Get Theme Version
+function mystyles() {
 	$theme_version = wp_get_theme()->get( 'Version' );
-
-	// Register and Enqueue Stylesheet
 		wp_enqueue_style( 'merlin-stylesheet', get_stylesheet_uri(), array(), $theme_version );
         wp_enqueue_style('bootstrap-css',get_template_directory_uri().'/assets/css/bootstrap.min.css');
         wp_enqueue_style('font-awesome-css',get_template_directory_uri().'/assets/css/fontawesome.min.css');
         wp_enqueue_style('main',get_template_directory_uri().'/assets/css/main.css');
     }
 
-/*****  function add by custom script ********
-******  added by hamzoooz             ********
-******  wp_enqueue_script()           *******/
-
-    function myscripts()
-    {
+function myscripts(){
         wp_deregister_script('jquery'); // to remove old jquery from wordpress
         wp_register_script('jquery', includes_url('/js/jquery/jquery.js') ,false,'', true);// add anew jquery to footer 
         wp_enqueue_script('bootstrap-js',get_template_directory_uri() .'/assets/js/bootstrap.min.js', array('jquery'), false, true );/* last true to put file script in last body becous the default value false */
@@ -147,15 +125,21 @@ add_action( 'after_setup_theme', 'hamzoooz_setup' );
         wp_script_add_data('Respond','conditional','lt IE 9');
     }
 
-    // add register nav menu
-    function register_my_nav_menu(){
+/**
+ * add register nav menu
+ * @since 1.0
+ * add by @hamzoooz
+ * 
+ */
+function register_my_nav_menu(){
         register_nav_menus(array(
-            'bootstrap-menu' => 'Navigation Bar',
-            'footer-menu' => 'footer Bar'
+            'bootstrap-menu' 	=> 	__( 'Navigation Bar','hamzoooz'),
+            'footer-menu' 		=>  __(	'footer Bar','hamzoooz'),
+			'header-menu' 		=>	__( 'Header Menu', 'hamzoooz' )
         ));
     }
     
-    function hamzoooz_bootstrap_menu(){ 
+function hamzoooz_bootstrap_menu(){ 
 		wp_nav_menu(array(
 			'theme_location' => 'bootstrap-menu',
 			'container' => false,
@@ -163,61 +147,48 @@ add_action( 'after_setup_theme', 'hamzoooz_setup' );
 			'fallback_cb' => '__return_false',
 			'items_wrap' => '<ul id="%1$s" class="navbar-nav me-auto mb-2 mb-md-0 %2$s">%3$s</ul>',
 			'depth' => 5,
-			'walker' => new bootstrap_5_wp_nav_menu_walker()
+			'walker' => new WP_Bootstrap_Navwalker()
 		));
     }
+add_action('wp_enqueue_scripts','mystyles');
+add_action('wp_enqueue_scripts','myscripts');
+add_action('init','register_my_nav_menu');//run after worprees has finished loading  
 
-/**
- *  Add Action 
- * @Author: @hamzoooz
- * @since
- * 
- * */
-		add_action('wp_enqueue_scripts','mystyles');
-		add_action('wp_enqueue_scripts','myscripts');
-		add_action('init','register_my_nav_menu');//run after worprees has finished loading  
-	
-    // Add costomize The excerpt
-    function hamzoooz_extend_excetrpt_length($length) {
-        if(is_author()){
-            return 40;
-        }elseif(is_category()){
-            return 60;
-        }
-        else{
-            return 15;
-        }
-		// #####################
-		// return 10;
-    }
-    add_filter('excerpt_length' , 'hamzoooz_extend_excetrpt_length');
+// Add costomize The excerpt
+function hamzoooz_extend_excetrpt_length($length) {
+	if(is_author()){
+		return 40;
+	}elseif(is_category()){
+		return 60;
+	}
+	else{
+		return 15;
+	}
+}
+add_filter('excerpt_length' , 'hamzoooz_extend_excetrpt_length');
 
-    function hamzoooz_extend_chinge_dots($more) {
-        return ' ...' ;
-    }
-    add_filter('excerpt_more' , 'hamzoooz_extend_chinge_dots');
+function hamzoooz_extend_chinge_dots($more) {
+	return ' ...' ;
+}
+add_filter('excerpt_more' , 'hamzoooz_extend_chinge_dots');
 
-    // Numbering Pagination
+// Numbering Pagination
 
-    function numbering_pagination() {
-        global $wp_query; //Make WP_Query Global
-        $all_pages = $wp_query->max_num_pages;  // Get All Posts
-        $current_page = max(1 , get_query_var('paged')); //Get Current Pages
-        // echo $current_page;
-        if($all_pages > 1){ // check if Total pages > 1
-            return paginate_links(array(
-                'base'      =>  get_pagenum_link() . '%_%',
-                'format'    =>  'page/%#%',  
-                'current'   =>  $current_page,
-                'mid_size'  =>  2 ,
-                'end_size'  =>  2,
-            ));
-        }
-    }
-
-
-    // ===================================================================
-
+function numbering_pagination() {
+	global $wp_query; //Make WP_Query Global
+	$all_pages = $wp_query->max_num_pages;  // Get All Posts
+	$current_page = max(1 , get_query_var('paged')); //Get Current Pages
+	// echo $current_page;
+	if($all_pages > 1){ // check if Total pages > 1
+		return paginate_links(array(
+			'base'      =>  get_pagenum_link() . '%_%',
+			'format'    =>  'page/%#%',  
+			'current'   =>  $current_page,
+			'mid_size'  =>  2 ,
+			'end_size'  =>  2,
+		));
+	}
+}
 
 /**
  * Register widget areas and custom widgets.
@@ -262,36 +233,16 @@ function hamzoooz_widgets_init() {
 add_action( 'widgets_init', 'hamzoooz_widgets_init' );
 
 
-    // ===================================================================
-    // Register Sidebar
+// add_action('widgets_init' , 'hamzoooz_main_sidebar');
+// Remove Paragraph Element From posts
 
-    // function hamzoooz_main_sidebar(){
-    //     register_sidebar(array(
-    //         'name'              =>  'Main Sidebar',
-    //         'id'                =>  'main-sidebar',
-    //         'description'       =>  'Main Sidebar',
-    //         'class'             =>  'main-sidebar',
-    //         'before_widget'     =>  '<div class="widget-content">',
-    //         'after_widget'      =>  '</div>',
-    //         'befor_title'             =>  '<h3 class="widget-title">',
-    //         'after_title'             =>  '</h3>'
-    //     ));
-    // }
+function hamzoooz_remove_p($content){
+	remove_filter('the_content' , 'wpautop');
+	return $content;
+}
+add_filter('the_content' ,'hamzoooz_remove_p', 0);
 
-    // add_action('widgets_init' , 'hamzoooz_main_sidebar');
-    // Remove Paragraph Element From posts
-
-
-    function hamzoooz_remove_p($content){
-        remove_filter('the_content' , 'wpautop');
-        return $content;
-    }
-    add_filter('the_content' ,'hamzoooz_remove_p', 0);
-
-
-// ========================================================================
-
-    /**
+/**
  * Set the content width in pixels, based on the theme's design and stylesheet.
  * Priority 0 to make it available to lower priority callbacks.
  *
@@ -301,7 +252,6 @@ function hamzoooz_content_width() {
 	$GLOBALS['content_width'] = apply_filters( 'hamzoooz_content_width', 810 );
 }
 add_action( 'after_setup_theme', 'hamzoooz_content_width', 0 );
-// ========================================================================
 
 /**
  * Enqueue custom fonts.
@@ -312,8 +262,6 @@ function hamzoooz_custom_fonts() {
 add_action( 'wp_enqueue_scripts', 'hamzoooz_custom_fonts', 1 );
 add_action( 'enqueue_block_editor_assets', 'hamzoooz_custom_fonts', 1 );
 
-// ========================================================================
-
 /**
  * Enqueue editor styles for the new Gutenberg Editor.
  */
@@ -322,7 +270,6 @@ function hamzoooz_block_editor_assets() {
 }
 add_action( 'enqueue_block_editor_assets', 'hamzoooz_block_editor_assets' );
 
-// ========================================================================
 
 /**
  * Add custom sizes for featured images
@@ -376,12 +323,3 @@ require get_template_directory() . '/include/slider.php';
 require get_template_directory() . '/include/widgets/widget-category-posts-boxed.php';
 require get_template_directory() . '/include/widgets/widget-category-posts-columns.php';
 require get_template_directory() . '/include/widgets/widget-category-posts-grid.php';
-
-// ========================================================================
-// ========================================================================
-// ========================================================================
-// ========================================================================
-// ========================================================================
-// ========================================================================
-// ========================================================================
-// ========================================================================

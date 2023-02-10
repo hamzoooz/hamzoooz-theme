@@ -1,15 +1,28 @@
 <?php
 
-
-if ( ! function_exists( 'hamzoooz_setup' ) ) :
+/**
+ * repotheme functions and definitions
+ *
+ * @link https://developer.wordpress.org/themes/basics/theme-functions/
+ *
+ * @package WordPress
+ * @subpackage Twenty_Twenty_Two
+ * @since repotheme 1.0
+ */
+if ( ! function_exists( 'repotheme_setup' ) ) :
 	/**
 	 * Sets up theme defaults and registers support for various WordPress features.
 	 *
 	 * Note that this function is hooked into the after_setup_theme hook, which
 	 * runs before the init hook. The init hook is too late for some features, such
 	 * as indicating support for post thumbnails.
+	 * 
+	 * @since repotheme 1.0
+	 *
+	 * @return void
 	 */
-	function hamzoooz_setup() {
+
+	function repotheme_setup() {
 
 		// Make theme available for translation. Translations can be filed in the /languages/ directory.
 		load_theme_textdomain( 'hamzoooz', get_template_directory() . '/languages' );
@@ -25,17 +38,9 @@ if ( ! function_exists( 'hamzoooz_setup' ) ) :
 
 		// Set detfault Post Thumbnail size
 		set_post_thumbnail_size( 820, 410, true );
-
+		// use class nav walker to handel nav menu bootstrap
 		require_once get_template_directory() . '/classes/class-wp-bootstrap-navwalker.php';
 		
-		// This theme uses wp_nav_menu() in one location.
-		register_nav_menus( array(
-			'primary'   => esc_html__( 'Main Navigation', 'hamzoooz' ),
-			'secondary' => esc_html__( 'Top Navigation', 'hamzoooz' ),
-			'footer'    => esc_html__( 'Footer Navigation', 'hamzoooz' ),
-			'social'    => esc_html__( 'Social Icons', 'hamzoooz' ),
-		) );
-
 		// Switch default core markup for search form, comment form, and comments to output valid HTML5.
 		add_theme_support( 'html5', array(
 			'search-form',
@@ -103,27 +108,41 @@ if ( ! function_exists( 'hamzoooz_setup' ) ) :
 		) );
 	}
 endif; // hamzoooz_setup
-add_action( 'after_setup_theme', 'hamzoooz_setup' );
+add_action( 'after_setup_theme', 'repotheme_setup' );
 
-function mystyles() {
-	$theme_version = wp_get_theme()->get( 'Version' );
+
+if ( ! function_exists( 'twentytwentytwo_styles' ) ) :
+	/**
+	 * Enqueue styles.
+	 *
+	 * @since Twenty Twenty-Two 1.0
+	 *
+	 * @return void
+	 */
+	
+	function mystyles() {
+		$theme_version = wp_get_theme()->get( 'Version' );
+		$version_string = is_string( $theme_version ) ? $theme_version : false;
 		wp_enqueue_style( 'merlin-stylesheet', get_stylesheet_uri(), array(), $theme_version );
-        wp_enqueue_style('bootstrap-css',get_template_directory_uri().'/assets/css/bootstrap.min.css');
-        wp_enqueue_style('font-awesome-css',get_template_directory_uri().'/assets/css/fontawesome.min.css');
-        wp_enqueue_style('main',get_template_directory_uri().'/assets/css/main.css');
-    }
-
-function myscripts(){
-        wp_deregister_script('jquery'); // to remove old jquery from wordpress
-        wp_register_script('jquery', includes_url('/js/jquery/jquery.js') ,false,'', true);// add anew jquery to footer 
-        wp_enqueue_script('bootstrap-js',get_template_directory_uri() .'/assets/js/bootstrap.min.js', array('jquery'), false, true );/* last true to put file script in last body becous the default value false */
-        wp_enqueue_script('fontawesome-js',get_template_directory_uri() .'/assets/js/fontawesome.min.js', array(), false, true );
-        wp_enqueue_script('main-js',get_template_directory_uri() . '/assets/js/main.js',array(),false,true);//array to tell what incluede this fun from libaraly
-        wp_enqueue_script('HTML5 Shiv',get_template_directory_uri() . '/assets/js/HTML5 Shiv 3.7.3.js');
-        wp_script_add_data('HTML5 Shiv','conditional','lt IE 9');
-        wp_enqueue_script('Respond',get_template_directory_uri().'/assets/js/Respond.js');//array to tell what incluede this fun from libaraly
-        wp_script_add_data('Respond','conditional','lt IE 9');
-    }
+		wp_enqueue_style('bootstrap-css',get_template_directory_uri().'/assets/css/bootstrap.min.css');
+		wp_enqueue_style('font-awesome-css',get_template_directory_uri().'/assets/css/fontawesome.min.css');
+		wp_enqueue_style('main',get_template_directory_uri().'/assets/css/main.css');
+	}
+	
+	function myscripts(){
+		wp_deregister_script('jquery'); // to remove old jquery from wordpress
+		wp_register_script('jquery', includes_url('/js/jquery/jquery.js') ,false,'', true);// add anew jquery to footer 
+		wp_enqueue_script('bootstrap-js',get_template_directory_uri() .'/assets/js/bootstrap.min.js', array('jquery'), false, true );/* last true to put file script in last body becous the default value false */
+		wp_enqueue_script('fontawesome-js',get_template_directory_uri() .'/assets/js/fontawesome.min.js', array(), false, true );
+		wp_enqueue_script('main-js',get_template_directory_uri() . '/assets/js/main.js',array(),false,true);//array to tell what incluede this fun from libaraly
+		wp_enqueue_script('HTML5 Shiv',get_template_directory_uri() . '/assets/js/HTML5 Shiv 3.7.3.js');
+		wp_script_add_data('HTML5 Shiv','conditional','lt IE 9');
+		wp_enqueue_script('Respond',get_template_directory_uri().'/assets/js/Respond.js');//array to tell what incluede this fun from libaraly
+		wp_script_add_data('Respond','conditional','lt IE 9');
+	}
+endif;
+add_action('wp_enqueue_scripts','mystyles');
+add_action('wp_enqueue_scripts','myscripts');
 
 /**
  * add register nav menu
@@ -132,26 +151,23 @@ function myscripts(){
  * 
  */
 function register_my_nav_menu(){
-        register_nav_menus(array(
-            'bootstrap-menu' 	=> 	__( 'Navigation Bar','hamzoooz'),
-            'footer-menu' 		=>  __(	'footer Bar','hamzoooz'),
-			'header-menu' 		=>	__( 'Header Menu', 'hamzoooz' )
-        ));
+	register_nav_menus(array(
+		'bootstrap-menu' 	=> 	__( 'bootstrap-menu','repotheme'),
+	));
     }
     
 function hamzoooz_bootstrap_menu(){ 
-		wp_nav_menu(array(
-			'theme_location' => 'bootstrap-menu',
-			'container' => false,
-			'menu_class' => '',
-			'fallback_cb' => '__return_false',
-			'items_wrap' => '<ul id="%1$s" class="navbar-nav me-auto mb-2 mb-md-0 %2$s">%3$s</ul>',
-			'depth' => 5,
-			'walker' => new WP_Bootstrap_Navwalker()
-		));
-    }
-add_action('wp_enqueue_scripts','mystyles');
-add_action('wp_enqueue_scripts','myscripts');
+	wp_nav_menu( array(
+		'theme_location'    => 'bootstrap-menu',
+		'depth'             => 5,
+		'container'         => 'div',
+		'container_class'   => 'collapse navbar-collapse',
+		'container_id'      => 'bs-example-navbar-collapse-1',
+		'menu_class'        => 'nav navbar-nav',
+		'fallback_cb'       => 'WP_Bootstrap_Navwalker::fallback',
+		'walker'            => new WP_Bootstrap_Navwalker(),
+	) );
+}
 add_action('init','register_my_nav_menu');//run after worprees has finished loading  
 
 // Add costomize The excerpt

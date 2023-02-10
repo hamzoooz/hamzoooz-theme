@@ -1,14 +1,10 @@
 <!-- get header start -->
 <?php
     get_header(); //Get Header
-
+    
     include(get_template_directory() . '/include/breadcrumb.php'); //include breadcrumb
-
-?>
-
+    echo '<div class="container">';?>
 <!--  start content -->
-
-<div class="container">
         <?php
             if(have_posts()){
                 while(have_posts()){

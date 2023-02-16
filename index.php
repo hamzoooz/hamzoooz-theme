@@ -12,22 +12,24 @@
  * @subpackage hamzooo
  * @since 2020 
  */
+// echo get_template_part('templates/test', 'test');
+// wp_die();
 get_header();?>
-
 <div class="container">
+<?php  get_template_part('/templates/slider/slider-with-title.php', '' ) ?>
 <?php
     if(have_posts()){
         while(have_posts()){
             the_post(); ?>
                 <div class="main-post ">
-                    <h2><a href="<?php the_permalink(); ?>" rel="bookmark" title="Permanent Link to <?php the_title_attribute(); ?>"><?php the_title(); ?></a></h2>
-                    <small> <span class="post-date" > <i class="fa fa-calendar "></i> <?php the_time('F jS, Y'); ?> by  <i class="fa fa-user "></i> <?php the_author_posts_link(); ?></span> <span > <i class="fa fa-comments "></i> <?php comments_popup_link('no comments' ,'one comment' , '% comments' , 'comment-url' , 'comment disabled') ?></span> </small>
+                <?php  get_template_part('/templates/meat', 'header' ) ?>
+                
                     <?php the_post_thumbnail('' , ['class' => 'img-responsive img-thumbnail' , 'title' => 'post-Image']) ?>
                     <hr>
-                    <div class="post-content" ><?php the_excerpt() ?></div>
+                    <div class="post-content" ><?php content() ?></div>
                     <hr>
-                    <p class="categories"> <i class="fa fa-tags fa-fw"></i><?php the_category(' , ') ?></p>
-                    <p class="post-tags"> <?php if (has_tag() ){ the_tags();} else { echo 'no tag can send';}?></p>
+                    <?php  get_template_part('/templates/meat', 'footer' ) ?>
+
                 </div>
             <?php                    
         }
@@ -40,12 +42,12 @@ get_header();?>
         if(get_previous_posts_link() ){
             previous_posts_link('<i class="fa fa-chevron-left fa-fw fa-lg" aria-hidden="true"></i> Prev');
         }else{
-            echo '<span class="pagination-prev-span" >prev</span>';
+            echo '<span class="d-none  pagination-prev-span" >prev</span>';
         }
         if (get_next_posts_link() ){
             next_posts_link( ' Next <i class="fa fa-chevron-right fa-fw fa-lg" aria-hidden="true"></i>');
         } else {
-            echo '<span class="pagination-next-span" > Next </span>';
+            echo '<span class="d-none pagination-next-span" > Next </span>';
         }
     echo '</div>';  
 

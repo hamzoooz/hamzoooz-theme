@@ -29,12 +29,25 @@
 
 <?php do_action( 'wp_body_open' ); ?>
 
-<div id="page" class="hfeed site">
 
 <div class="container">
+    <div class="row">
+    <img class="name-site" src="/assets/img/name_logo-alukari1439.png" alt="">
+    <!-- <div class="col-md-9 col-sm-9 col-lg-9  ">
+            <div class="name-site">
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-3 col-lg-3 ">
+            <div class="logo-site">
+            </div>
+        </div> -->
+    </div> <!-- row -->
+</div> <!-- container -->
 
+<div id="page" class="hfeed site">
+<div class="container">
     <!-- anination awoesome -->
-    <div id="particle-canvas" class="particle-canvas"> </div>
+    <!-- <div id="particle-canvas" class="particle-canvas"> </div> -->
 
     <nav class="navbar navbar-expand-md navbar-light bg-light" role="navigation">
         <div id="content " class="site-content container clearfix">

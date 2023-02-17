@@ -9,7 +9,7 @@
             if(have_posts()){
                 while(have_posts()){
                     the_post();
-                        get_template_part('templates/content/content-single', '1');
+                        get_template_part('template-part/content/content-single');
                 }
             }
 

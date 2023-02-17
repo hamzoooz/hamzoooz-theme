@@ -16,31 +16,26 @@
 // wp_die();
 get_header();?>
 
-<!-- <?php  get_template_part('/template-part/slider/slider-with-title' ) ?> -->
+<?php echo get_template_part('/template-part/slider/slider-with-title' ); ?>
 <?php
     if(have_posts()){
         while(have_posts()){
             the_post(); ?>
                 <div class="container">
                     <div class="main-post ">
+                        <h3><a href="<?php the_permalink() ?>"> <?php the_title() ?> </a></h3>
                         <?php  get_template_part('/template-part/meta/meta', 'header' ) ?>
-
-                        <?php the_post_thumbnail('' , ['class' => 'img-responsive img-thumbnail' , 'title' => 'post-Image']) ?>
-                        <hr>
-
-                        <div class="post-content" ><?php the_content() ?></div>
-                        <hr>
-
+                        <?php  get_template_part('/template-part/content/content-index' ) ?>
                         <?php  get_template_part('/template-part/meta/meta', 'footer' ) ?>
                     </div>
                 </div>
                 <?php                    
         }
-    }else
-    get_template_part('/template-part/meta/meta', 'footer' );
-    ?>
+    }else{
+        get_template_part('/template-part/content/content-none' );  
+    }?>
+
     <div class="clearfix"></div>
-    <?php  get_template_part('/template-part/pagination/pagination', '' ) ?>
-    <?php  ?>
+    <?php  get_template_part('/template-part/pagination/pagination', '' ); ?>
     
     <?php get_footer();?>

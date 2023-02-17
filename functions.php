@@ -9,8 +9,7 @@
  * @subpackage Twenty_Twenty_Two
  * @since repotheme 1.0
  */
-$text_domain = "hamzoooz";
-global $text_domain;
+
 // $GLOBALES ['text_domain'] = $text_domain;
 if ( ! function_exists( 'repotheme_setup' ) ) :
 	/**
@@ -42,7 +41,7 @@ if ( ! function_exists( 'repotheme_setup' ) ) :
 		// Set detfault Post Thumbnail size
 		set_post_thumbnail_size( 820, 410, true );
 		// use class nav walker to handel nav menu bootstrap
-		require_once get_template_directory() . '/classes/class-wp-bootstrap-navwalker.php';
+		require_once get_template_directory() . '/classes/bootstrap_5_wp_nav_menu_walker.php';
 		
 		// Switch default core markup for search form, comment form, and comments to output valid HTML5.
 		add_theme_support( 'html5', array(
@@ -126,7 +125,8 @@ if ( ! function_exists( 'twentytwentytwo_styles' ) ) :
 	function mystyles() {
 		$theme_version = wp_get_theme()->get( 'Version' );
 		$version_string = is_string( $theme_version ) ? $theme_version : false;
-		wp_enqueue_style( 'merlin-stylesheet', get_stylesheet_uri(), array(), $theme_version );
+		wp_enqueue_style( 'hamzoooz-stylesheet', get_stylesheet_uri(), array(), $theme_version );
+		wp_style_add_data( 'hamzoooz-stylesheet','rtl','replace');
 		wp_enqueue_style('bootstrap-css',get_template_directory_uri().'/assets/css/bootstrap.min.css');
 		wp_enqueue_style('font-awesome-css',get_template_directory_uri().'/assets/css/fontawesome.min.css');
 		wp_enqueue_style('main',get_template_directory_uri().'/assets/css/main.css');
@@ -153,25 +153,23 @@ add_action('wp_enqueue_scripts','myscripts');
  * add by @hamzoooz
  * 
  */
-function register_my_nav_menu(){
-	register_nav_menus(array(
-		'bootstrap-menu' 	=> 	__( 'bootstrap-menu','repotheme'),
-	));
-    }
-    
+function wpk_bootstrap_menu() {
+	register_nav_menu('bootstrap-menu',__( 'Bootstrap 5 Menu' ));
+	}
+	add_action( 'init', 'wpk_bootstrap_menu' );
+	
+			
 function hamzoooz_bootstrap_menu(){ 
-	wp_nav_menu( array(
-		'theme_location'    => 'bootstrap-menu',
-		'depth'             => 5,
-		'container'         => 'div',
-		'container_class'   => 'collapse navbar-collapse',
-		'container_id'      => 'bs-example-navbar-collapse-1',
-		'menu_class'        => 'nav navbar-nav',
-		'fallback_cb'       => 'WP_Bootstrap_Navwalker::fallback',
-		'walker'            => new WP_Bootstrap_Navwalker(),
-	) );
+	wp_nav_menu(array(
+		'theme_location' => 'bootstrap-menu',
+		'container' => false,
+		'menu_class' => '',
+		'fallback_cb' => '__return_false',
+		'items_wrap' => '<ul id="%1$s" class="navbar-nav me-auto mb-2 mb-md-0 %2$s">%3$s</ul>',
+		'depth' => 2,
+		'walker' => new bootstrap_5_wp_nav_menu_walker()
+	));
 }
-add_action('init','register_my_nav_menu');//run after worprees has finished loading  
 
 // Add costomize The excerpt
 function hamzoooz_extend_excetrpt_length($length) {

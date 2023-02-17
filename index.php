@@ -12,49 +12,35 @@
  * @subpackage hamzooo
  * @since 2020 
  */
-// echo get_template_part('templates/test', 'test');
+// echo get_template_part('template-part/test', 'test');
 // wp_die();
 get_header();?>
-<div class="container">
-<?php  get_template_part('/templates/slider/slider-with-title.php', '' ) ?>
+
+<!-- <?php  get_template_part('/template-part/slider/slider-with-title' ) ?> -->
 <?php
     if(have_posts()){
         while(have_posts()){
             the_post(); ?>
-                <div class="main-post ">
-                <?php  get_template_part('/templates/meat', 'header' ) ?>
-                
-                    <?php the_post_thumbnail('' , ['class' => 'img-responsive img-thumbnail' , 'title' => 'post-Image']) ?>
-                    <hr>
-                    <div class="post-content" ><?php content() ?></div>
-                    <hr>
-                    <?php  get_template_part('/templates/meat', 'footer' ) ?>
+                <div class="container">
+                    <div class="main-post ">
+                        <?php  get_template_part('/template-part/meta/meta', 'header' ) ?>
 
+                        <?php the_post_thumbnail('' , ['class' => 'img-responsive img-thumbnail' , 'title' => 'post-Image']) ?>
+                        <hr>
+
+                        <div class="post-content" ><?php the_content() ?></div>
+                        <hr>
+
+                        <?php  get_template_part('/template-part/meta/meta', 'footer' ) ?>
+                    </div>
                 </div>
-            <?php                    
+                <?php                    
         }
-    }
-
-    echo '<div class="clearfix"></div>';
+    }else
+    get_template_part('/template-part/meta/meta', 'footer' );
+    ?>
+    <div class="clearfix"></div>
+    <?php  get_template_part('/template-part/pagination/pagination', '' ) ?>
+    <?php  ?>
     
-    // Add next and previous
-    echo '<div class="post-pagination">';
-        if(get_previous_posts_link() ){
-            previous_posts_link('<i class="fa fa-chevron-left fa-fw fa-lg" aria-hidden="true"></i> Prev');
-        }else{
-            echo '<span class="d-none  pagination-prev-span" >prev</span>';
-        }
-        if (get_next_posts_link() ){
-            next_posts_link( ' Next <i class="fa fa-chevron-right fa-fw fa-lg" aria-hidden="true"></i>');
-        } else {
-            echo '<span class="d-none pagination-next-span" > Next </span>';
-        }
-    echo '</div>';  
-
-    echo '<div class="numbering_pagination">';
-    echo numbering_pagination(); //Get Current Page 
-    echo '</div>';?>
-
-</div>
-
-<?php get_footer();?>
+    <?php get_footer();?>

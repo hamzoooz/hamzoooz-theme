@@ -9,6 +9,9 @@
  * @subpackage Twenty_Twenty_Two
  * @since repotheme 1.0
  */
+$text_domain = "hamzoooz";
+global $text_domain;
+// $GLOBALES ['text_domain'] = $text_domain;
 if ( ! function_exists( 'repotheme_setup' ) ) :
 	/**
 	 * Sets up theme defaults and registers support for various WordPress features.

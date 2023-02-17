@@ -7,35 +7,34 @@ body{
     /* background-repeat: repeat; */
     /* background-size: cover; */
 }
+.hfeed{
+    position: relative;
+}
 .logo-site{
-    background-color: #337ab7;
-    border: 2px solid rgb(54, 120, 182);
-    background-image: url("../img/logo.png");
+    /* background-color: #337ab7;
+    border: 2px solid rgb(54, 120, 182); */
+    /* background-image: url("../img/logo.png"); */
     background-size:contain;
     background-repeat: no-repeat;
     width: 100%;
     height: 100px;
 }
 .name-site {  
-    background-image: url("../img/name_logo-alukari1439.png");
-    width: 100%;
-    height: 100px;
-    min-height: 800px;
+    /* background-image: url("../img/name_logo-alukari1439.png"); */
+    /* width: 100%;
+    height: 100px; */
+    min-height: 300px;
     background-size:contain;
     background-repeat: no-repeat;
 }
 .footer-site{
     background-color: #156580;
     color: #EEE;
-    width: 100%;
-    position: absolute;
-    bottom: 0px;
-    left: 0px;
     line-height: 82px;
     margin-top: 10px;
     font-size: 17px;
     font-weight: bold;
-    box-shadow: 1px 8px 8px 9px #cecdcd;
+    box-shadow: 1px 8px 8px 9px #5c5c5c;
     border-radius: 20px 20px 0 0;
 }
 nav.navbar.navbar-default {
@@ -421,8 +420,7 @@ letter-spacing: -3px;}
 /* Starrt category Page */
 .category-information-row{
     background-color: #FFF;
-    margin: 25px 15px;
-    border: 1px solid #aaaaaa;
+    margin-top:10px;
     border-radius: 5px;
 
 }

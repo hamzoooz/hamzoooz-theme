@@ -1,33 +1,37 @@
 <?php
 
 
+
 ?>
 
+
 <div class="container">
-  <div id="carouselExampleCaptions" class="carousel slide">
-    <div class="carousel-indicators">
-    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <div class="slider-with-title">
+    <div id="carouselExampleCaptions" class="carousel slide">
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
     <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
     <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
   </div>
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img src="https://images.unsplash.com/photo-1609599006353-e629aaabfeae?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cXVyYW58ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60" class="d-block w-100 " alt="...">
-      <div class="carousel-caption d-none d-md-block">
+      <img src="https://images.unsplash.com/photo-1609599006353-e629aaabfeae?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cXVyYW58ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60" class="d-block  " alt="...">
+      <div class="seperoter"></div>
+      <div class="carousel-caption d-md-block">
         <h5>First slide label</h5>
         <p>Some representative placeholder content for the first slide.</p>
       </div>
     </div>
     <div class="carousel-item">
-      <img src="https://images.unsplash.com/photo-1589462135796-2b46e4bdd7fe?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTh8fHF1cmFufGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60" class="d-block w-100" alt="...">
-      <div class="carousel-caption d-none d-md-block">
+      <img src="https://images.unsplash.com/photo-1589462135796-2b46e4bdd7fe?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTh8fHF1cmFufGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60" class="d-block " alt="...">
+      <div class="carousel-caption  d-md-block">
         <h5>Second slide label</h5>
         <p>Some representative placeholder content for the second slide.</p>
       </div>
     </div>
     <div class="carousel-item">
-      <img src="https://images.unsplash.com/photo-1609656036445-e3f158ca97d5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDd8fHF1cmFufGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60" class="d-block w-100" alt="...">
-      <div class="carousel-caption d-none d-md-block">
+      <img src="https://images.unsplash.com/photo-1609656036445-e3f158ca97d5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDd8fHF1cmFufGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60" class="d-block " alt="...">
+      <div class="carousel-caption  d-md-block">
         <h5>Third slide label</h5>
         <p>Some representative placeholder content for the third slide.</p>
       </div>
@@ -43,4 +47,5 @@
   </button>
 </div>
 
+</div>
 </div>

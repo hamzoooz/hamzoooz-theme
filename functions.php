@@ -128,6 +128,7 @@ if ( ! function_exists( 'twentytwentytwo_styles' ) ) :
 		wp_enqueue_style( 'hamzoooz-stylesheet', get_stylesheet_uri(), array(), $theme_version );
 		wp_style_add_data( 'hamzoooz-stylesheet','rtl','replace');
 		wp_enqueue_style('bootstrap-css',get_template_directory_uri().'/assets/css/bootstrap.min.css');
+		wp_style_add_data( 'bootstrap-css','rtl','replace');
 		wp_enqueue_style('font-awesome-css',get_template_directory_uri().'/assets/css/fontawesome.min.css');
 		wp_enqueue_style('main',get_template_directory_uri().'/assets/css/main.css');
 	}

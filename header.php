@@ -13,7 +13,7 @@
 // $theme_options = hamzoooz_theme_options();
 ?>
 <!DOCTYPE html>
-<html <?php language_attributes(); bloginfo('language'); bloginfo('text_direction'); ?>>
+<html <?php language_attributes(); bloginfo('language'); ?>>
 <head>
     <meta charset = "<?php bloginfo("charset"); ?>" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" >

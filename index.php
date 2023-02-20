@@ -17,6 +17,7 @@
 get_header();?>
 
 <?php echo get_template_part('/template-part/slider/slider-with-title' ); ?>
+<!-- <?php // echo get_template_part('/template-part/slider/slider-with-title-coustoum' ); ?> -->
 <?php
     if(have_posts()){
         while(have_posts()){

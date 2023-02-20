@@ -27,7 +27,7 @@ if ( ! function_exists( 'repotheme_setup' ) ) :
 	function repotheme_setup() {
 
 		// Make theme available for translation. Translations can be filed in the /languages/ directory.
-		load_theme_textdomain( 'hamzoooz', get_template_directory() . '/languages' );
+		// load_theme_hamzoooz( 'hamzoooz', get_template_directory() . '/languages' );
 
 		// Add default posts and comments RSS feed links to head.
 		add_theme_support( 'automatic-feed-links' );
@@ -207,6 +207,103 @@ function numbering_pagination() {
 		));
 	}
 }
+
+// add coustoum post type 
+/**
+ * Register a custom post type called "book".
+ *
+ * @see get_post_type_labels() for label keys.
+ */
+function hamzoooz_post_book() {
+    $labels = array(
+        'name'                  => _x( 'books', 'Post type general name', 'hamzoooz' ),
+        'singular_name'         => _x( 'book', 'Post type singular name', 'hamzoooz' ),
+        'menu_name'             => _x( 'books', 'Admin Menu text', 'hamzoooz' ),
+        'name_admin_bar'        => _x( 'book', 'Add New on Toolbar', 'hamzoooz' ),
+        'add_new'               => __( 'Add New', 'hamzoooz' ),
+        'add_new_item'          => __( 'Add New book', 'hamzoooz' ),
+        'new_item'              => __( 'New book', 'hamzoooz' ),
+        'edit_item'             => __( 'Edit book', 'hamzoooz' ),
+        'view_item'             => __( 'View book', 'hamzoooz' ),
+        'all_items'             => __( 'All books', 'hamzoooz' ),
+        'search_items'          => __( 'Search books', 'hamzoooz' ),
+        'parent_item_colon'     => __( 'Parent books:', 'hamzoooz' ),
+        'not_found'             => __( 'No books found.', 'hamzoooz' ),
+        'not_found_in_trash'    => __( 'No books found in Trash.', 'hamzoooz' ),
+        'featured_image'        => _x( 'book Cover Image', 'Overrides the “Featured Image” phrase for this post type. Added in 4.3', 'hamzoooz' ),
+        'set_featured_image'    => _x( 'Set cover image', 'Overrides the “Set featured image” phrase for this post type. Added in 4.3', 'hamzoooz' ),
+        'remove_featured_image' => _x( 'Remove cover image', 'Overrides the “Remove featured image” phrase for this post type. Added in 4.3', 'hamzoooz' ),
+        'use_featured_image'    => _x( 'Use as cover image', 'Overrides the “Use as featured image” phrase for this post type. Added in 4.3', 'hamzoooz' ),
+        'archives'              => _x( 'book archives', 'The post type archive label used in nav menus. Default “Post Archives”. Added in 4.4', 'hamzoooz' ),
+        'insert_into_item'      => _x( 'Insert into book', 'Overrides the “Insert into post”/”Insert into page” phrase (used when inserting media into a post). Added in 4.4', 'hamzoooz' ),
+        'uploaded_to_this_item' => _x( 'Uploaded to this book', 'Overrides the “Uploaded to this post”/”Uploaded to this page” phrase (used when viewing media attached to a post). Added in 4.4', 'hamzoooz' ),
+        'filter_items_list'     => _x( 'Filter books list', 'Screen reader text for the filter links heading on the post type listing screen. Default “Filter posts list”/”Filter pages list”. Added in 4.4', 'hamzoooz' ),
+        'items_list_navigation' => _x( 'books list navigation', 'Screen reader text for the pagination heading on the post type listing screen. Default “Posts list navigation”/”Pages list navigation”. Added in 4.4', 'hamzoooz' ),
+        'items_list'            => _x( 'books list', 'Screen reader text for the items list heading on the post type listing screen. Default “Posts list”/”Pages list”. Added in 4.4', 'hamzoooz' ),
+    );
+ 
+    $args = array(
+        'labels'             => $labels,
+        'public'             => true,
+        'publicly_queryable' => true,
+        'show_ui'            => true,
+        'show_in_menu'       => true,
+        'query_var'          => true,
+        'rewrite'            => array( 'slug' => 'book' ),
+        'capability_type'    => 'post',
+        'has_archive'        => true,
+        'hierarchical'       => false,
+        'menu_position'      => null,
+        'supports'           => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments' ),
+    );
+ 
+    register_post_type( 'book', $args );
+}
+add_action( 'init', 'hamzoooz_post_book' );
+/**
+ *  Create Custo Post Type for Slideres
+ * 
+ */
+function create_slider_post_type() {
+ 
+	$labels = array(
+		'name' => __( 'Slider' ),
+		'singular_name' => __( 'Slider' ),
+		'all_items'           => __( 'All Sliders' ),
+		'view_item'           => __( 'View Slider' ),
+		'add_new_item'        => __( 'Add New Slider' ),
+		'add_new'             => __( 'Add New Slider' ),
+		'edit_item'           => __( 'Edit Slider' ),
+		'update_item'         => __( 'Update Slider' ),
+		'search_items'        => __( 'Search Slider' ),
+		'search_items' => __('Sliders')
+	);
+ 
+	$args = array(
+		'labels' => $labels,
+		'description' => 'Add New Slider contents',
+		'menu_position' => 27,
+		'public' => true,
+		'has_archive' => true,
+		'map_meta_cap' => true,
+		'capability_type' => 'post',
+		'hierarchical' => true,
+		'rewrite' => array('slug' => false),
+		'menu_icon'=>'dashicons-format-image',
+		'supports' => array(
+			'title',
+			'thumbnail','excerpt','content','comments'
+		),
+	);
+	register_post_type( 'slider', $args);
+ 
+}
+add_action( 'init', 'create_slider_post_type' );
+add_action( 'init', function() {
+    remove_post_type_support( 'slider', 'editor' );
+    remove_post_type_support( 'slider', 'slug' );
+} );
+
 
 /**
  * Register widget areas and custom widgets.

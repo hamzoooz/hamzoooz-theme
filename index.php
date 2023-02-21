@@ -38,5 +38,5 @@ get_header();?>
 
     <div class="clearfix"></div>
     <?php  get_template_part('/template-part/pagination/pagination', '' ); ?>
-    
-    <?php get_footer();?>
+
+    <?php get_footer();?> 

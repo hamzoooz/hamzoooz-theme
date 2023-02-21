@@ -36,3 +36,6 @@ Nicolas Gallagher and Jonathan Neal http://necolas.github.com/normalize.css/
 body{
     direction: rtl;
 }
+*{
+    text-align: right;
+}

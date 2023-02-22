@@ -9,15 +9,15 @@
  *
  * @link https://www.hamzoooz.com
  * @package WordPress
- * @subpackage hamzooo
+ * @subpackage "hamzoooz-ar"
  * @since 2020 
  */
+
 // echo get_template_part('template-part/test', 'test');
 // wp_die();
 get_header();?>
 
 <?php echo get_template_part('/template-part/slider/slider-with-title' ); ?>
-<!-- <?php // echo get_template_part('/template-part/slider/slider-with-title-coustoum' ); ?> -->
 <?php
     if(have_posts()){
         while(have_posts()){

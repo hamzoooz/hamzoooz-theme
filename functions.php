@@ -259,7 +259,84 @@ function hamzoooz_post_book() {
  
     register_post_type( 'book', $args );
 }
-add_action( 'init', 'hamzoooz_post_book' );
+//hook into the init action and call create_writers_nonhierarchical_taxonomy when it fires
+  
+add_action( 'init', 'hamzoooz_post_book', 0 );
+  
+function create_writers_nonhierarchical_taxonomy() {
+  
+	// Labels part for the GUI
+  
+  $labels = array(
+    'name' => _x( 'writers', 'taxonomy general name' ),
+    'singular_name' => _x( 'writers', 'taxonomy singular name' ),
+    'search_items' =>  __( 'Search writerss' ),
+    'popular_items' => __( 'Popular writers' ),
+    'all_items' => __( 'All writers' ),
+    'parent_item' => null,
+    'parent_item_colon' => null,
+    'edit_item' => __( 'Edit Writer' ), 
+    'update_item' => __( 'Update Writer' ),
+    'add_new_item' => __( 'Add New Writer' ),
+    'new_item_name' => __( 'New Writer Name' ),
+    'separate_items_with_commas' => __( 'Separate writers with commas' ),
+    'add_or_remove_items' => __( 'Add or remove writers' ),
+    'choose_from_most_used' => __( 'Choose from the most used writers' ),
+    'menu_name' => __( 'writers' ),
+  ); 
+  
+	// Now register the non-hierarchical taxonomy like tag
+  
+  register_taxonomy('writers','book',array(
+    'hierarchical' => false,
+    'labels' => $labels,
+    'show_ui' => true,
+    'show_in_rest' => true,
+    'show_admin_column' => true,
+    'update_count_callback' => '_update_post_term_count',
+    'query_var' => true,
+    'rewrite' => array( 'slug' => 'writer' ),
+  ));
+}
+add_action( 'init', 'create_writers_nonhierarchical_taxonomy', 0 );
+
+function create_publishers_nonhierarchical_taxonomy() {
+  
+	// Labels part for the GUI
+  
+  $labels = array(
+    'name' => _x( 'publishers', 'taxonomy general name' ),
+    'singular_name' => _x( 'publishers', 'taxonomy singular name' ),
+    'search_items' =>  __( 'Search writerss' ),
+    'popular_items' => __( 'Popular publishers' ),
+    'all_items' => __( 'All publishers' ),
+    'parent_item' => null,
+    'parent_item_colon' => null,
+    'edit_item' => __( 'Edit Publisher' ), 
+    'update_item' => __( 'Update Publisher' ),
+    'add_new_item' => __( 'Add New Publisher' ),
+    'new_item_name' => __( 'New Publisher Name' ),
+    'separate_items_with_commas' => __( 'Separate publishers with commas' ),
+    'add_or_remove_items' => __( 'Add or remove publishers' ),
+    'choose_from_most_used' => __( 'Choose from the most used publishers' ),
+    'menu_name' => __( 'publishers' ),
+  ); 
+  
+	// Now register the non-hierarchical taxonomy like tag
+  
+  register_taxonomy('publishers','book',array(
+    'hierarchical' => false,
+    'labels' => $labels,
+    'show_ui' => true,
+    'show_in_rest' => true,
+    'show_admin_column' => true,
+    'update_count_callback' => '_update_post_term_count',
+    'query_var' => true,
+    'rewrite' => array( 'slug' => 'writer' ),
+  ));
+}
+add_action( 'init', 'create_publishers_nonhierarchical_taxonomy', 0 );
+
 /**
  *  Create Custo Post Type for Slideres
  * 

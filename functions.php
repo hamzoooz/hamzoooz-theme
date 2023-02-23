@@ -496,8 +496,10 @@ add_action( 'after_setup_theme', 'hamzoooz_add_image_sizes' );
 require get_template_directory() . '/include/theme-info.php';
 
 // include Theme Customizer Options
+//"/opt/lampp/htdocs/wordpress/wp-content/themes/hamzoooz-theme/include/customizer/customizer.php"
 require get_template_directory() . '/include/customizer/customizer.php';
 require get_template_directory() . '/include/customizer/default-options.php';
+require get_template_directory() . '/include/customizer/customize-colors.php';
 
 // Include Extra Functions
 require get_template_directory() . '/include/extras.php';

@@ -17,6 +17,31 @@
 get_header();?>
 <?php echo 'this front page'; ?>
 <?php echo get_template_part('/template-part/slider/slider-with-title' ); ?>
+
+<?php 
+if(hamzoooz_display_theme_modification()["boxes_options"]){ ?>
+    <div class="container">
+        <div class="row ">
+        <?php
+        $number_of_boxex =  hamzoooz_display_theme_modification()["number_of_boxex"];
+
+        for($i=1; $i<=$number_of_boxex; $i++){
+            $title_box_in_front = 'title_box'. $i;
+            $content_box_in_front = 'p_box'. $i;?>
+            
+            <div class="col-<?php echo 12/$number_of_boxex; ?> main-post p-2 ">
+            
+            <h2><?php //echo hamzoooz_display_theme_modification()[$title_box_in_front] ?></h2>
+            <h2><?php echo get_theme_mod('hamzoooz_add_box' . $i) ?></h2>
+            <p><?php echo get_theme_mod('hamzoooz_add_box_desc' . $i) ?></p>
+            
+            <p><?php //echo hamzoooz_display_theme_modification()[$content_box_in_front] ?></p>
+        </div>
+        <?php } ?>
+    </div>
+</div>
+<?php } ?>
+
 <!-- <?php // echo get_template_part('/template-part/slider/slider-with-title-coustoum' ); ?> -->
 <?php
     if(have_posts()){

@@ -12,8 +12,7 @@
  * @subpackage hamzooo
  * @since 2020 
  */
-// echo get_template_part('template-part/test', 'test');
-// wp_die();
+
 get_header();?>
 <?php echo 'this front page'; ?>
 <?php echo get_template_part('/template-part/slider/slider-with-title' ); ?>

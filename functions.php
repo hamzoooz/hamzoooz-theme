@@ -345,15 +345,14 @@ function create_slider_post_type() {
  
 	$labels = array(
 		'name' => __( 'Slider' ),
-		'singular_name' => __( 'Slider' ),
-		'all_items'           => __( 'All Sliders' ),
-		'view_item'           => __( 'View Slider' ),
-		'add_new_item'        => __( 'Add New Slider' ),
-		'add_new'             => __( 'Add New Slider' ),
-		'edit_item'           => __( 'Edit Slider' ),
-		'update_item'         => __( 'Update Slider' ),
-		'search_items'        => __( 'Search Slider' ),
-		'search_items' => __('Sliders')
+		'singular_name' => __( 'Slider', 'hamzoooz' ),
+		'all_items'           => __( 'All Sliders' , 'hamzoooz'),
+		'view_item'           => __( 'View Slider' , 'hamzoooz'),
+		'add_new_item'        => __( 'Add New Slider', 'hamzoooz' ),
+		'add_new'             => __( 'Add New Slider' , 'hamzoooz'),
+		'edit_item'           => __( 'Edit Slider' , 'hamzoooz'),
+		'update_item'         => __( 'Update Slider' , 'hamzoooz'),
+		'search_items' => __('Search Sliders', 'hamzoooz'),
 	);
  
 	$args = array(
@@ -500,6 +499,7 @@ require get_template_directory() . '/include/theme-info.php';
 require get_template_directory() . '/include/customizer/customizer.php';
 require get_template_directory() . '/include/customizer/default-options.php';
 require get_template_directory() . '/include/customizer/customize-colors.php';
+require get_template_directory() . '/include/customizer/customize-media.php';
 
 // Include Extra Functions
 require get_template_directory() . '/include/extras.php';

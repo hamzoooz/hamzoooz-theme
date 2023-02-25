@@ -9,6 +9,7 @@ function hamzoooz_customizer($wp_customize){
     $wp_customize->add_setting('hamzoooz_footer_text',array(
         "default"   =>  __("all copyright reserver",'hazmoooz'),
         'type'      => 'theme_mod',
+        'sanitize_callback' =>  'sanitize_text_field',
     ));
     $wp_customize->add_control('hamzoooz_footer_text',array(
         'setting'   =>'hamzoooz_footer_text',
@@ -44,7 +45,8 @@ function hamzoooz_customizer($wp_customize){
         )); 
         $wp_customize->add_setting($add_setting_id,array(
             'default'   =>  __($default_setting, 'hamzoooz'),
-            'type'      =>  'theme_mod'
+            'type'      =>  'theme_mod',
+            'sanitize_callback' =>  'sanitize_title',
         ));
         $wp_customize->add_control($add_setting_id,array(
             // 'setting'       =>      $add_setting_id,
@@ -61,7 +63,8 @@ function hamzoooz_customizer($wp_customize){
         // add boxes to front page
         $wp_customize->add_setting($add_setting_id_desc,array(
             'default'   =>  __($default_setting, 'hamzoooz'),
-            'type'      =>  'theme_mod'
+            'type'      =>  'theme_mod',
+            'sanitize_callback' =>  'sanitize_text_field',
         ));
 
         $wp_customize->add_control($add_setting_id_desc,array(
@@ -84,6 +87,7 @@ function hamzoooz_customizer($wp_customize){
     $wp_customize->add_setting('option_of_boxes',array(
         "default"   =>  1,
         'type'      => 'theme_mod',
+        'sanitize_callback' =>  'sanitize_text_field',
     ));
     $wp_customize->add_control('option_of_boxes',array(
         'setting'   =>'option_of_boxes',
@@ -100,6 +104,7 @@ function hamzoooz_customizer($wp_customize){
     $wp_customize->add_setting('number_of_boxex',array(
         "default"   =>  3,
         'type'      => 'theme_mod',
+        'sanitize_callback' =>  'sanitize_text_field',
     ));
     $wp_customize->add_control('number_of_boxex',array(
         'setting'   =>'number_of_boxex',
@@ -123,6 +128,7 @@ function hamzoooz_customizer($wp_customize){
         ),
         "section"   =>  'option_of_boxes_section'
     ));
+
 }
 
 add_action( 'customize_register', 'hamzoooz_customizer' );
@@ -146,7 +152,8 @@ function hamzoooz_display_theme_modification(){
     }
     $output['boxes_options']  = get_theme_mod("option_of_boxes" ,'About Us ');
     $output['number_of_boxex']  = get_theme_mod("number_of_boxex" ,3);
-    
+
+
     return $output;
 }
 

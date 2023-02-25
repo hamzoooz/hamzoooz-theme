@@ -125,7 +125,7 @@ if ( ! function_exists( 'twentytwentytwo_styles' ) ) :
 	function mystyles() {
 		$theme_version = wp_get_theme()->get( 'Version' );
 		$version_string = is_string( $theme_version ) ? $theme_version : false;
-		wp_enqueue_style( 'hamzoooz-stylesheet', get_stylesheet_uri(), array(), $theme_version );
+		wp_enqueue_style( 'hamzoooz-stylesheet', get_stylesheet_uri(), array(), $version_string );
 		wp_style_add_data( 'hamzoooz-stylesheet','rtl','replace');
 		wp_enqueue_style('bootstrap-css',get_template_directory_uri().'/assets/css/bootstrap.min.css');
 		wp_style_add_data( 'bootstrap-css','rtl','replace');
@@ -135,7 +135,7 @@ if ( ! function_exists( 'twentytwentytwo_styles' ) ) :
 	
 	function myscripts(){
 		wp_deregister_script('jquery'); // to remove old jquery from wordpress
-		wp_register_script('jquery', includes_url('/js/jquery/jquery.js') ,false,'', true);// add anew jquery to footer 
+		wp_register_script('jquery', includes_url('/js/jquery/jquery.js') , [] ,false, true);// add anew jquery to footer 
 		wp_enqueue_script('bootstrap-js',get_template_directory_uri() .'/assets/js/bootstrap.min.js', array('jquery'), false, true );/* last true to put file script in last body becous the default value false */
 		wp_enqueue_script('fontawesome-js',get_template_directory_uri() .'/assets/js/fontawesome.min.js', array(), false, true );
 		wp_enqueue_script('main-js',get_template_directory_uri() . '/assets/js/main.js',array(),false,true);//array to tell what incluede this fun from libaraly

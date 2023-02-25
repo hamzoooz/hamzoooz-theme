@@ -1,0 +1,16 @@
+/*
+
+Theme Name:   hamzoooz-child
+Theme URI: http://www.albukhari1439.online
+Description:  hamzoooz Child Theme
+Author:       hamzoooz
+Author URI:   http://www.albukhari1439.online
+Template:     hamzoooz
+Version:      1.0.0
+Text Domain:  hamzoooz-child
+*/
+
+.body,
+* {
+    background-color: rgb(20, 111, 163);
+}

@@ -40,3 +40,5 @@ get_header();?>
     <?php  get_template_part('/template-part/pagination/pagination', '' ); ?>
 
     <?php get_footer();?> 
+
+    <!-- label:ghp_e93ubuerduzdvwkmaef926tv8nzbli1axk05  -->
